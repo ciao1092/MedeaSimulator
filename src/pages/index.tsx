@@ -234,7 +234,7 @@ export default function Home() {
                             height={undefined}
                             width={undefined}
                             src={NotesWidget}
-                            alt="Clock Widget"
+                            alt="Notes Widget"
                         />
                         <Image
                             className="flex-1 w-full h-auto"
@@ -246,7 +246,7 @@ export default function Home() {
                         {/* <div className="h-[138px] flex-1 outline outline-2 rounded-[21px] bg-[#6f2]"></div> */}
                     </div>
                     <div className="px-[24.3px] flex flex-row gap-[15px]">
-                        <div className="flex-1">Clock</div>
+                        <div className="flex-1">Notes</div>
                         <div className="flex-1">Weather</div>
                     </div>
 
