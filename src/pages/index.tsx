@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import AppIcon from "@/components/AppIcon";
+import AppIconContainer from "@/components/AppIconContainer";
 import AppIconRow from "@/components/AppIconRow";
 
 import AppStoreIcon from "../../public/app_store.svg";
@@ -15,22 +17,21 @@ import AppleWalletIcon from "../../public/apple_wallet.svg";
 import CalendarIcon from "../../public/calendar.svg";
 import CameraIcon from "../../public/camera.svg";
 import ClockIcon from "../../public/clock.svg";
-import NotesWidget from "../../public/notes_widget.svg";
 import FaceTimeIcon from "../../public/facetime.svg";
 import GoogleDriveIcon from "../../public/google_drive.svg";
 import iMessageIcon from "../../public/imessage.svg";
 import iOS_17_WallPaper from "../../public/iOS_17_WallPaper.png";
 import iOSStatusRight from "../../public/ios_status_right.svg";
 import MailIcon from "../../public/mail.svg";
+import MedeaJpeg from "../../public/medea.jpg";
 import NewsIcon from "../../public/news.svg";
 import NotesIcon from "../../public/notes.svg";
+import NotesWidget from "../../public/notes_widget.svg";
 import PhoneIcon from "../../public/phone.svg";
 import PhotosIcon from "../../public/photos.svg";
 import SafariIcon from "../../public/safari.svg";
 import SettingsIcon from "../../public/settings.svg";
 import WeatherWidget from "../../public/weather_widget.svg";
-import AppIconContainer from "@/components/AppIconContainer";
-import AppIcon from "@/components/AppIcon";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -45,8 +46,8 @@ type NotificationData = {
 
 const NotificationTransitionDuration: number = 1000;
 
-function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max);
+function generateRandomInt(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export default function Home() {
@@ -113,13 +114,10 @@ export default function Home() {
 
     const ShowNotification = (newNotification: NotificationData) => {
         setNotificationVisible(false);
-        setTimeout(
-            () => {
-                setNotification(undefined);
-                setNotification(newNotification);
-            },
-            NotificationTransitionDuration
-        );
+        setTimeout(() => {
+            setNotification(undefined);
+            setNotification(newNotification);
+        }, NotificationTransitionDuration);
     };
 
     const messages: { from: string; text: string }[] = [
@@ -137,7 +135,7 @@ export default function Home() {
                 icon: iMessageIcon,
                 when: "now",
                 duration: 4000,
-                key: i
+                key: i,
             });
             await new Promise((f) => setTimeout(f, 8000));
         }
@@ -163,7 +161,7 @@ export default function Home() {
                 id="iphone-screen"
                 className="bg-[#000] box-content text-[#fff] border-[#000] border-[14px] rounded-[50px] m-0 w-[332.5px] h-[720px] overflow-hidden z-10"
                 style={{
-                    backgroundImage: `url(${iOS_17_WallPaper.src})`,
+                    backgroundImage: `url(${MedeaJpeg.src})`,
                     backgroundSize: "cover",
                 }}
             >
@@ -319,9 +317,19 @@ export default function Home() {
                                         icon: iMessageIcon,
                                         title: "Jason",
                                         body: "u r dum",
-                                        when: "Yesterday " + getRandomInt(3000),
+                                        when: `Yesterday ${generateRandomInt(
+                                            0,
+                                            23
+                                        )
+                                            .toString()
+                                            .padStart(
+                                                2,
+                                                "0"
+                                            )}:${generateRandomInt(1, 59)
+                                            .toString()
+                                            .padStart(2, "0")}`,
                                         duration: 5000,
-                                        key: getRandomInt(1000),
+                                        key: generateRandomInt(0, 1000),
                                     })
                                 }
                             />
