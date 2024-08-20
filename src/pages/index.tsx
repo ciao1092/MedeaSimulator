@@ -32,6 +32,7 @@ import PhotosIcon from "../../public/photos.svg";
 import SafariIcon from "../../public/safari.svg";
 import SettingsIcon from "../../public/settings.svg";
 import WeatherWidget from "../../public/weather_widget.svg";
+import messages from "@/messages";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -80,6 +81,7 @@ export default function Home() {
                 if (newLevel >= 100) {
                     setBootScreen(false);
                     clearInterval(timer);
+                    setTimeout(bulkNotify, 1000);
                 }
                 return newLevel;
             });
@@ -120,11 +122,7 @@ export default function Home() {
         }, NotificationTransitionDuration);
     };
 
-    const messages: { from: string; text: string }[] = [
-        { from: "Pino", text: "Oh no 🫢😮" },
-        { from: "Jason", text: "I am not sorry 😊" },
-        { from: "ninw2", text: "OMG WHAT HAPPENED" },
-    ];
+    
 
     const bulkNotify = async () => {
         for (let i = 0; i < messages.length; i++) {
