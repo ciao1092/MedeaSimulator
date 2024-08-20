@@ -1,118 +1,339 @@
+// import { Inter } from 'next/font/google';
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+import AppIconRow from "@/components/AppIconRow";
+
+import AppStoreIcon from "../../public/app_store.svg";
+import AppleLogo from "../../public/apple.svg";
+import AppleHealthIcon from "../../public/apple_health.svg";
+import AppleMapsIcon from "../../public/apple_maps.svg";
+import AppleMusicIcon from "../../public/apple_music.svg";
+import PodcastsIcon from "../../public/apple_podcasts.svg";
+import AppleTVIcon from "../../public/apple_tv.svg";
+import AppleWalletIcon from "../../public/apple_wallet.svg";
+import CalendarIcon from "../../public/calendar.svg";
+import CameraIcon from "../../public/camera.svg";
+import ClockIcon from "../../public/clock.svg";
+import NotesWidget from "../../public/notes_widget.svg";
+import FaceTimeIcon from "../../public/facetime.svg";
+import GoogleDriveIcon from "../../public/google_drive.svg";
+import iMessageIcon from "../../public/imessage.svg";
+import iOS_17_WallPaper from "../../public/iOS_17_WallPaper.png";
+import iOSStatusRight from "../../public/ios_status_right.svg";
+import MailIcon from "../../public/mail.svg";
+import NewsIcon from "../../public/news.svg";
+import NotesIcon from "../../public/notes.svg";
+import PhoneIcon from "../../public/phone.svg";
+import PhotosIcon from "../../public/photos.svg";
+import SafariIcon from "../../public/safari.svg";
+import SettingsIcon from "../../public/settings.svg";
+import WeatherWidget from "../../public/weather_widget.svg";
+import AppIconContainer from "@/components/AppIconContainer";
+import AppIcon from "@/components/AppIcon";
+
+// const inter = Inter({ subsets: ["latin"] });
+
+type NotificationData = {
+    key: number;
+    title: string;
+    body: string;
+    icon: any;
+    when: string;
+    duration: number;
+};
+
+const NotificationTransitionDuration: number = 1000;
+
+function getRandomInt(max: number) {
+    return Math.floor(Math.random() * max);
+}
 
 export default function Home() {
-  return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    const [date, setDate] = useState(new Date());
+    const [bootScreen, setBootScreen] = useState(false);
+    const [bootScreenBarLevel, setBootScreenBarLevel] = useState(0);
+    const [notificationVisible, setNotificationVisible] = useState(false);
+    const [notification, setNotification] = useState<
+        NotificationData | undefined
+    >(undefined);
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+    const notificationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+    const firstUpdate = useRef(true);
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+    useEffect(() => {
+        const timer = setInterval(() => setDate(new Date()), 500);
+        return function cleanup() {
+            clearInterval(timer);
+        };
+    }, []);
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
+    const reboot = () => {
+        setBootScreen(true);
+        setBootScreenBarLevel(0);
+        const timer = setInterval(() => {
+            setBootScreenBarLevel((oldLevel) => {
+                const newLevel = oldLevel + 30;
+                console.log(newLevel);
+                if (newLevel >= 100) {
+                    setBootScreen(false);
+                    clearInterval(timer);
+                }
+                return newLevel;
+            });
+        }, 200);
+    };
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+    // setNotification({
+    //     icon: iMessageIcon,
+    //     title: "Jason",
+    //     body: "u r dum",
+    //     when: "now",
+    //     duration: 1000,
+    // });
+
+    useEffect(() => {
+        if (notification !== undefined) {
+            setNotificationVisible(true);
+            notificationTimeoutRef.current = setTimeout(() => {
+                setNotificationVisible(false);
+                setTimeout(() => {
+                    setNotification(undefined);
+                }, NotificationTransitionDuration);
+            }, notification.duration);
+        }
+        return function cleanup() {
+            if (notificationTimeoutRef.current) {
+                clearTimeout(notificationTimeoutRef.current);
+                notificationTimeoutRef.current = null;
+            }
+        };
+    }, [notification]);
+
+    const ShowNotification = (newNotification: NotificationData) => {
+        setNotificationVisible(false);
+        setTimeout(
+            () => {
+                setNotification(undefined);
+                setNotification(newNotification);
+            },
+            NotificationTransitionDuration
+        );
+    };
+
+    const messages: { from: string; text: string }[] = [
+        { from: "Pino", text: "Oh no 🫢😮" },
+        { from: "Jason", text: "I am not sorry 😊" },
+        { from: "ninw2", text: "OMG WHAT HAPPENED" },
+    ];
+
+    const bulkNotify = async () => {
+        for (let i = 0; i < messages.length; i++) {
+            const message = messages[i];
+            ShowNotification({
+                title: message.from,
+                body: message.text,
+                icon: iMessageIcon,
+                when: "now",
+                duration: 4000,
+                key: i
+            });
+            await new Promise((f) => setTimeout(f, 8000));
+        }
+    };
+
+    useEffect(() => {
+        if (firstUpdate.current) {
+            console.log("Loaded");
+            bulkNotify();
+        }
+    }, []);
+
+    return (
+        <>
+            <div className="w-[332.5px] text-center mx-10 hidden">
+                <h1 className="text-4xl my-5">iPhone 13.5</h1>
+                <button className="text-blue-500 underline" onClick={reboot}>
+                    Reboot
+                </button>
+            </div>
+
+            <div
+                id="iphone-screen"
+                className="bg-[#000] box-content text-[#fff] border-[#000] border-[14px] rounded-[50px] m-0 w-[332.5px] h-[720px] overflow-hidden z-10"
+                style={{
+                    backgroundImage: `url(${iOS_17_WallPaper.src})`,
+                    backgroundSize: "cover",
+                }}
+            >
+                <div
+                    id="bootScreen"
+                    className={
+                        "h-[100%] bg-[#000] text-[#fff] justify-center items-center" +
+                        " " +
+                        (bootScreen ? "flex flex-col" : "hidden")
+                    }
+                >
+                    <Image src={AppleLogo} alt="Apple logo" width={50} />
+                    <div className="mt-[40px] h-[3px] w-[110px]  bg-gray-500 rounded-full">
+                        <div
+                            className="h-[3px] w-full bg-white rounded-full transition-[width] duration-500"
+                            style={{ width: `${bootScreenBarLevel}%` }}
+                        ></div>
+                    </div>
+                </div>
+                <div className="px-[34px] pt-[9px] text-[14px] flex flex-row">
+                    <div className="flex-1 font-semibold">
+                        {date.toLocaleTimeString("it", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        })}
+                    </div>
+                    <div className="flex-0">
+                        <Image
+                            src={iOSStatusRight}
+                            className="inline mt-[-2px]"
+                            alt="status icons"
+                            height={13}
+                        />
+                    </div>
+                </div>
+                <div
+                    className={
+                        `fixed w-[inherit] rounded-[24px] py-[2px] px-[6.4px] z-0 text-black text-xs transition-transform` +
+                        " " +
+                        (notificationVisible ? "" : "translate-y-[-100vh]")
+                    }
+                    style={{
+                        transitionDuration: `${NotificationTransitionDuration}ms`,
+                        transitionDelay: "0",
+                    }}
+                >
+                    <div className="bg-[#ffffff60] backdrop-blur-3xl rounded-[24px] h-[56.25px] p-[12.3px]">
+                        <Image
+                            alt="app icon"
+                            src={notification?.icon}
+                            width={undefined}
+                            height={undefined}
+                            className="h-auto w-[33.5px] float-start"
+                        />
+                        <div className="ms-[10px] float-start">
+                            <h1 className="font-semibold">
+                                {notification?.title}
+                            </h1>
+                            <h2 className="">{notification?.body}</h2>
+                        </div>
+                        <div className="float-end me-[10px]">
+                            {notification?.when}
+                        </div>
+                    </div>
+                </div>
+                <div className="text-xs text-center">
+                    <div className="pt-[25px] px-[24.3px] flex flex-row gap-[15px] h-[160px]">
+                        <Image
+                            className="flex-1 w-full h-auto"
+                            height={undefined}
+                            width={undefined}
+                            src={NotesWidget}
+                            alt="Clock Widget"
+                        />
+                        <Image
+                            className="flex-1 w-full h-auto"
+                            height={undefined}
+                            width={undefined}
+                            src={WeatherWidget}
+                            alt="Weather Widget"
+                        />
+                        {/* <div className="h-[138px] flex-1 outline outline-2 rounded-[21px] bg-[#6f2]"></div> */}
+                    </div>
+                    <div className="px-[24.3px] flex flex-row gap-[15px]">
+                        <div className="flex-1">Clock</div>
+                        <div className="flex-1">Weather</div>
+                    </div>
+
+                    <div className="mt-[25px]">
+                        <AppIconRow
+                            apps={[
+                                { icon: FaceTimeIcon, text: "FaceTime" },
+                                { icon: CalendarIcon, text: "Calendar" },
+                                { icon: PhotosIcon, text: "Photos" },
+                                { icon: CameraIcon, text: "Camera" },
+                            ]}
+                        />
+
+                        <AppIconRow
+                            apps={[
+                                { icon: MailIcon, text: "Mail" },
+                                { icon: NotesIcon, text: "Notes" },
+                                { icon: NewsIcon, text: "News" },
+                                { icon: ClockIcon, text: "Clock" },
+                            ]}
+                        />
+
+                        <AppIconRow
+                            apps={[
+                                { icon: AppleTVIcon, text: "Apple TV" },
+                                { icon: PodcastsIcon, text: "Podcasts" },
+                                { icon: AppStoreIcon, text: "App Store" },
+                                { icon: AppleMapsIcon, text: "Maps" },
+                            ]}
+                        />
+
+                        <AppIconRow
+                            apps={[
+                                { icon: AppleHealthIcon, text: "Health" },
+                                { icon: AppleWalletIcon, text: "Wallet" },
+                                { icon: SettingsIcon, text: "Settings" },
+                                { icon: GoogleDriveIcon, text: "Drive" },
+                            ]}
+                        />
+                    </div>
+
+                    <div className="mt-[22.3px]">
+                        <div className="rounded-[100px] max-h-[25px] w-[68px] mx-auto bg-[#ffffff60] backdrop-blur-3xl px-[7px] py-[5px]">
+                            Search
+                        </div>
+                    </div>
+                    <div
+                        id="dock"
+                        className="rounded-[35px] box-border bg-[#ffffff60] backdrop-blur-3xl py-[15px] px-[16px] mx-[9px] mt-[20px]"
+                    >
+                        <div className="p-0 h-[53px] flex flex-row gap-[23px]">
+                            <Image
+                                src={PhoneIcon}
+                                className="flex-1 w-full h-auto"
+                                alt="Phone icon"
+                            />
+                            <Image
+                                src={SafariIcon}
+                                className="flex-1 w-full h-auto"
+                                alt="Safari icon"
+                            />
+                            <Image
+                                src={iMessageIcon}
+                                className="flex-1 w-full h-auto"
+                                alt="iMessage icon"
+                                onClick={() =>
+                                    ShowNotification({
+                                        icon: iMessageIcon,
+                                        title: "Jason",
+                                        body: "u r dum",
+                                        when: "Yesterday " + getRandomInt(3000),
+                                        duration: 5000,
+                                        key: getRandomInt(1000),
+                                    })
+                                }
+                            />
+                            <Image
+                                src={AppleMusicIcon}
+                                className="flex-1 w-full h-auto"
+                                alt="Apple Music icon"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 }

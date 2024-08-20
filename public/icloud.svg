@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="512px"
+   style="enable-background:new 0 0 512 512;"
+   version="1.1"
+   viewBox="0 0 512 512"
+   width="512px"
+   xml:space="preserve"
+   id="svg2"
+   sodipodi:docname="icloud.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+   id="defs2" />
+  <sodipodi:namedview
+   id="namedview2"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="1.1890995"
+   inkscape:cx="317.46713"
+   inkscape:cy="265.32683"
+   inkscape:window-width="1920"
+   inkscape:window-height="1057"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="layer1" />
+  <g
+   inkscape:groupmode="layer"
+   id="layer1"
+   inkscape:label="icon_background">
+    <rect
+   style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:19.043;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+   id="rect1"
+   width="512"
+   height="512"
+   x="0"
+   y="0"
+   rx="89.825"
+   ry="89.825" />
+  </g>
+  <g
+   inkscape:groupmode="layer"
+   id="layer2"
+   inkscape:label="icon_foreground"
+   style="display:inline"
+   sodipodi:insensitive="true">
+    <g
+   id="_x39_2-icloud"
+   transform="matrix(0.92672376,0,0,0.92672376,18.758254,18.758254)">
+      <g
+   id="g2">
+        <g
+   id="g1">
+          <path
+   d="m 389.172,211.142 c 0.68,-4.904 1.041,-9.899 1.041,-14.954 0,-57.721 -46.824,-104.672 -104.393,-104.672 -36.949,0 -71.07,19.945 -89.533,51.086 -9.303,-4.102 -19.356,-6.227 -29.761,-6.227 -41.101,0 -74.564,33.559 -74.564,74.767 0,1.528 0.032,3.018 0.149,4.481 -43.519,12.655 -74.714,53.265 -74.714,100.189 0,57.715 46.823,104.673 104.392,104.673 h 268.424 c 57.563,0 104.391,-46.958 104.391,-104.673 0,-58.048 -46.95,-105.149 -105.432,-104.67 z m 0,0"
+   style="fill:#2299f8"
+   id="path1" />
+        </g>
+      </g>
+    </g>
+    <g
+   id="Layer_1" />
+  </g>
+</svg>
