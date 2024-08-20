@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    distDir: "docs",
+    distDir: "build",
     // to export static
     output: "export",
     images: {
