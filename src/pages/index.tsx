@@ -83,7 +83,7 @@ export default function Home() {
                 }
                 return newLevel;
             });
-        }, 200);
+        }, 1500);
     };
 
     // setNotification({
@@ -201,7 +201,9 @@ export default function Home() {
                     className={
                         `fixed w-[inherit] rounded-[24px] py-[2px] px-[6.4px] z-0 text-black text-xs transition-transform` +
                         " " +
-                        (notificationVisible ? "" : "translate-y-[-100vh]")
+                        (notificationVisible ? "" : "translate-y-[-100vh]") +
+                        " " +
+                        (bootScreen ? "hidden" : "")
                     }
                     style={{
                         transitionDuration: `${NotificationTransitionDuration}ms`,
@@ -282,7 +284,7 @@ export default function Home() {
                             apps={[
                                 { icon: AppleHealthIcon, text: "Health" },
                                 { icon: AppleWalletIcon, text: "Wallet" },
-                                { icon: SettingsIcon, text: "Settings" },
+                                { icon: AppleMusicIcon, text: "Music" },
                                 { icon: GoogleDriveIcon, text: "Drive" },
                             ]}
                         />
@@ -334,9 +336,10 @@ export default function Home() {
                                 }
                             />
                             <Image
-                                src={AppleMusicIcon}
+                                onClick={reboot}
+                                src={SettingsIcon}
                                 className="flex-1 w-full h-auto"
-                                alt="Apple Music icon"
+                                alt="Settings icon"
                             />
                         </div>
                     </div>
