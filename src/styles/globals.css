@@ -5,6 +5,6 @@
 @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
 body {
-	font-family: "SF Pro", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+	font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "avenir next", avenir, "segoe ui", "helvetica neue", helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif !important;
 	background-color: #121212;
 }
