@@ -46,13 +46,13 @@ export default function App({ Component, pageProps }: AppProps) {
         };
     }, [notification]);
 
-    const ShowNotification = (newNotification: NotificationData) => {
-        setNotificationVisible(false);
-        setTimeout(() => {
-            setNotification(undefined);
-            setNotification(newNotification);
-        }, NotificationTransitionDuration);
-    };
+    // const ShowNotification = (newNotification: NotificationData) => {
+    //     setNotificationVisible(false);
+    //     setTimeout(() => {
+    //         setNotification(undefined);
+    //         setNotification(newNotification);
+    //     }, NotificationTransitionDuration);
+    // };
 
     // const firstUpdate = useRef(true);
     const bulkNotify = async () => {
