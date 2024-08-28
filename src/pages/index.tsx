@@ -1,7 +1,6 @@
 // import { Inter } from 'next/font/google';
 // const inter = Inter({ subsets: ["latin"] });
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
 
 import AppIconRow from "@/components/AppIconRow";
 
@@ -33,7 +32,7 @@ type HomeProps = {
     bulkNotify: Function;
 };
 
-export default function Home(props: HomeProps) {
+export default function Home(_props: HomeProps) {
     return (
         <>
             <div className="text-xs text-center">
