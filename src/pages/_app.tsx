@@ -1,14 +1,14 @@
-import MedeaJpeg from "../../public/medea.jpg";
-import "@/styles/globals.css";
-import Image from "next/image";
-import type { AppProps } from "next/app";
-import iOSStatusRight from "../../public/ios_status_right.svg";
-import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
-import "@/styles/material-icons.css";
-import chats from "@/chats";
-import iMessageIcon from "../../public/imessage.svg";
+import '@/styles/globals.css';
+import '@/styles/material-icons.css';
 
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+
+import iOSStatusRight from '../../public/ios_status_right.svg';
+import MedeaJpeg from '../../public/medea.jpg';
+
+import type { AppProps } from "next/app";
 type NotificationData = {
     key: number;
     title: string;
@@ -56,21 +56,23 @@ export default function App({ Component, pageProps }: AppProps) {
 
     // const firstUpdate = useRef(true);
     const bulkNotify = async () => {
-        for (let i = 0; i < chats.length; i++) {
-            const chat = chats[i];
-            for (let j = 0; j < chat.messages.length; j++) {
-                const message = chat.messages[j];
-                ShowNotification({
-                    title: chat.from,
-                    body: message.text,
-                    icon: iMessageIcon,
-                    when: "now",
-                    duration: 4000,
-                    key: i,
-                });
-                await new Promise((f) => setTimeout(f, 8000));
-            }
-        }
+        alert("disabled")
+        // const chats = await ChatStore.read();
+        // for (let i = 0; i < chats.length; i++) {
+        //     const chat = chats[i];
+        //     for (let j = 0; j < chat.messages.length; j++) {
+        //         const message = chat.messages[j];
+        //         ShowNotification({
+        //             title: chat.from,
+        //             body: message.text,
+        //             icon: iMessageIcon,
+        //             when: "now",
+        //             duration: 4000,
+        //             key: i,
+        //         });
+        //         await new Promise((f) => setTimeout(f, 8000));
+        //     }
+        // }
     };
     // useEffect(() => {
     //     if (firstUpdate.current) {
@@ -93,7 +95,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <div
             id="phone-screen"
-            className="bg-[#000] box-content text-[#fff] border-[#000] border-[14px] rounded-[50px] m-0 w-[332.5px] h-[720px] overflow-hidden z-10"
+            className="bg-[#000] box-content text-[#fff] border-[#000] border-[14px] flex flex-col rounded-[50px] m-0 w-[332.5px] h-[720px] overflow-hidden z-10"
             style={{
                 backgroundImage:
                     pathname === "/" ? `url(${MedeaJpeg.src})` : "",
@@ -101,7 +103,7 @@ export default function App({ Component, pageProps }: AppProps) {
             }}
         >
             <div
-                className={`px-[34px] pt-[9px] text-[14px] flex flex-row ${
+                className={`px-[34px] pt-[9px] text-[14px] flex-0 flex flex-row ${
                     pathname === "/messages" ? "bg-[#333]" : "bg-transparent"
                 }`}
             >

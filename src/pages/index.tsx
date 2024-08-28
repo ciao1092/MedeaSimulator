@@ -4,8 +4,6 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import AppIconRow from "@/components/AppIconRow";
-import chats from "@/chats";
-import { generateRandomInt } from "@/utils";
 
 import AppStoreIcon from "../../public/app_store.svg";
 import AppleHealthIcon from "../../public/apple_health.svg";
@@ -119,35 +117,23 @@ export default function Home(props: HomeProps) {
                             className="flex-1 w-full h-auto"
                             alt="Safari icon"
                         />
-                        <Link href="/messages">
+                        <Link href="/messages" className="flex flex-1">
                             <Image
                                 src={iMessageIcon}
                                 className="flex-1 w-full h-auto"
                                 alt="iMessage icon"
                             />
                         </Link>
-                        <Image
-                            src={SettingsIcon}
-                            className="flex-1 w-full h-auto cursor-pointer"
-                            alt="Settings icon"
-                            onClick={
-                                () => props.bulkNotify() // ShowNotification({
-                                //     icon: iMessageIcon,
-                                //     title: "Jason",
-                                //     body: "u r dum",
-                                //     when: `Yesterday ${generateRandomInt(0, 23)
-                                //         .toString()
-                                //         .padStart(2, "0")}:${generateRandomInt(
-                                //         1,
-                                //         59
-                                //     )
-                                //         .toString()
-                                //         .padStart(2, "0")}`,
-                                //     duration: 5000,
-                                //     key: generateRandomInt(0, 1000),
-                                // })
-                            }
-                        />
+                        <Link href="/admin" className="flex flex-1">
+                            <Image
+                                src={SettingsIcon}
+                                className="flex-1 w-full h-auto"
+                                alt="Settings icon"
+                                // onClick={
+                                //     () => props.bulkNotify()
+                                // }
+                            />
+                        </Link>
                     </div>
                 </div>
             </div>

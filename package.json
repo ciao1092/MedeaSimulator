@@ -11,14 +11,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "fs-json-store": "^8.0.1",
     "medeasimulator": "file:",
-    "next": "14.2.5",
+    "next": "^14.2.7",
     "react": "^18",
     "react-dom": "^18",
+    "react-server-dom-webpack": "^0.0.1",
     "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^22.5.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "postcss": "^8",
