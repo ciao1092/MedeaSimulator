@@ -1,8 +1,6 @@
-import Message from "@/models/message.model";
 import type { NextApiRequest, NextApiResponse } from "next";
 import messageStore from "@/data/messageStore";
-import { waitingClients } from "@/stores/clients.store";
-import { RequestData, ResponseData } from "../../RequestResponseData";
+import { ResponseData } from "../../RequestResponseData";
 
 export default async function handler(
     req: NextApiRequest,

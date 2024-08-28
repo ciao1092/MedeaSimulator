@@ -11,7 +11,7 @@ export function relativeDate(date: Date): string {
     const year = month * 12;
 
     let n: number | undefined = undefined;
-    let u: string | undefined = undefined;
+    let u: string | undefined;
 
     const s = (n: number): string => (n === 1 ? "" : "s");
 

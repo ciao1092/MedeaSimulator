@@ -86,7 +86,7 @@ export default ({ chat }: { chat: Chat | undefined }) => {
     const subscribe = async (abortSignal: AbortSignal) => {
         const fid = fetcherId;
 
-        if (fetching.current === true || messages === undefined) {
+        if (fetching.current || messages === undefined) {
             return;
         }
 
