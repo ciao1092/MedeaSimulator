@@ -95,7 +95,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <div
             id="phone-screen"
-            className="bg-[#000] box-content text-[#fff] border-[#000] border-[14px] flex flex-col rounded-[50px] m-0 w-[332.5px] h-[720px] overflow-hidden z-10"
+            className="bg-[#000] absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] box-content text-[#fff] border-[#000] border-[14px] flex flex-col rounded-[50px] m-0 w-[332.5px] h-[720px] overflow-hidden z-10"
             style={{
                 backgroundImage:
                     pathname === "/" ? `url(${MedeaJpeg.src})` : "",

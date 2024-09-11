@@ -6,7 +6,7 @@ import { relativeDate } from "@/relativeDate";
 import NotFound from "../[...notfound]";
 
 const getChats = async (): Promise<Chat[]> =>
-    (await fetch("http://localhost:3000/api/chats").then((r) => r.json()))
+    (await fetch("http://localhost/api/chats").then((r) => r.json()))
         .chats;
 
 let chats: Chat[] | undefined = undefined;
@@ -41,7 +41,7 @@ export const getStaticProps = async ({
     params: { id: string };
 }) => ({
     props: {
-        chat: (await getChatsByFrom(params.id)) ?? null,
+        chat: (await getChatsByFrom(params.id)) ?? [],
     },
 });
 
@@ -167,7 +167,7 @@ export default ({ chat }: { chat: Chat | undefined }) => {
                         return (
                             <>
                                 <div className="flex justify-center pt-1">
-                                    {relativeDate(message.when)}
+                                    {/*relativeDate(message.when)*/}
                                 </div>
                                 <div
                                     key={key}
