@@ -6,7 +6,7 @@ import { relativeDate } from "@/relativeDate";
 import NotFound from "../[...notfound]";
 
 const getChats = async (): Promise<Chat[]> =>
-    (await fetch("http://localhost/api/chats").then((r) => r.json()))
+    (await fetch("http://localhost:3000/api/chats").then((r) => r.json()))
         .chats;
 
 let chats: Chat[] | undefined = undefined;
